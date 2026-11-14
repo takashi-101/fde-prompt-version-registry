@@ -1,13 +1,11 @@
 # FDE Prompt Version Registry（プロンプト版管理・回帰判定レジストリ）
 
-[![tests](https://github.com/takashi-101/fde-prompt-version-registry/actions/workflows/tests.yml/badge.svg)](https://github.com/takashi-101/fde-prompt-version-registry/actions/workflows/tests.yml)
-
 プロンプトの本文を、名前と版（バージョン）ごとに評価スコアとともに JSON ファイルへ保存し、2つの版のスコアを比べて回帰（更新後に品質が下がること）が起きていないかを判定する小さなレジストリです。評価スコアは、利用者が別の手段で測って渡します。このツールは評価を実行しません。
 
 ## 30秒で読む要点
 - **版ごとに本文・スコア・ハッシュを保存します**：`register` は、本文の SHA-256（内容から決まる固定長の値）の先頭12文字を `content_hash` として付け、JSON ファイルに書き出します。同じ名前と版で登録し直すと上書きします。
 - **回帰の判定はスコアの比較だけです**：`check_regression(name, base_ver, cand_ver)` は、候補の版のスコアが基準の版以上なら `True`（回帰なし）、下回れば `False` を返します。登録されていない版を指定すると `KeyError` です。
-- **標準ライブラリだけで動きます**：外部との通信や有料APIは使いません。テスト24件（正常・境界・異常）を、CI（GitHub Actions による自動テスト）で Python 3.11 と 3.12 で実行しています。
+- **標準ライブラリだけで動きます**：外部との通信や有料APIは使いません。テストは24件（正常・境界・異常）です。
 
 ## 見本を動かす
 `examples/sample_prompts.json` は、架空の問い合わせ分類プロンプトの3つの版と、比べる組の一覧です。スコアは架空の値で、実際に評価したものではありません。
@@ -58,15 +56,16 @@ examples/
   run_example.py         見本の定義を登録し、check_regression の結果を表示
   sample_prompts.json    見本のプロンプトと比べる組（架空）
 tests/                   ユニットテスト
-.github/workflows/       CI（Python 3.11・3.12）
 ```
 
 ## 根拠（学習）
 
-| 機能 | 裏付けになる学習（発行元・名称・発行日） | 照会先（Credly） |
-|---|---|---|
-| プロンプトの版管理と内容のハッシュ | Coursera（認定：IBM）「Generative AI: Prompt Engineering」2026年11月9日 | https://www.credly.com/badges/ecab0c9c-e786-4c7b-8209-e796cff09b9a |
-| 版どうしの評価スコアの比較 | Coursera「Google Prompting Essentials」2026年10月13日 | https://www.credly.com/badges/c5305332-c47b-480d-85e0-678a72908a79 |
+| 求められる力 | 機能 | 裏付けになる学習（発行元・名称・発行日） | 照会先（Credly） |
+|---|---|---|---|
+| 生成AI・LLMの実装（RAG・エージェント・MCP） | プロンプトの版管理と内容のハッシュ | Coursera（認定：IBM）「Generative AI: Prompt Engineering」2026年11月9日 | https://www.credly.com/badges/ecab0c9c-e786-4c7b-8209-e796cff09b9a |
+| 生成AI・LLMの実装（RAG・エージェント・MCP） | 版どうしの評価スコアの比較 | Coursera「Google Prompting Essentials」2026年10月13日 | https://www.credly.com/badges/c5305332-c47b-480d-85e0-678a72908a79 |
+
+「求められる力」の分け方は、[プロフィール](https://github.com/takashi-101) の「FDE・AXで求められる力と、その根拠」と同じです。
 
 ## ライセンス
 MIT
