@@ -1,0 +1,26 @@
+{
+  "prompts": [
+    {
+      "name": "inquiry_triage",
+      "version": "v1",
+      "template": "次の問い合わせを「手続き」「苦情」「その他」のどれかに分類してください。\n問い合わせ：{inquiry}",
+      "eval_score": 0.82
+    },
+    {
+      "name": "inquiry_triage",
+      "version": "v2",
+      "template": "次の問い合わせを「手続き」「苦情」「その他」のどれかに分類し、分類名だけを返してください。\n問い合わせ：{inquiry}",
+      "eval_score": 0.88
+    },
+    {
+      "name": "inquiry_triage",
+      "version": "v3",
+      "template": "問い合わせを短く分類してください。\n{inquiry}",
+      "eval_score": 0.79
+    }
+  ],
+  "checks": [
+    {"name": "inquiry_triage", "base": "v1", "candidate": "v2"},
+    {"name": "inquiry_triage", "base": "v2", "candidate": "v3"}
+  ]
+}

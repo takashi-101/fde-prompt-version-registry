@@ -19,7 +19,7 @@ class PromptVersion:
 
 
 class PromptRegistry:
-    """Stores versioned prompts and prevents unverified regressions."""
+    """Stores versioned prompts with content hashes; compares scores supplied by the caller."""
 
     def __init__(self, store_path: Path | str) -> None:
         self.store_path = Path(store_path)
