@@ -61,5 +61,12 @@ tests/                   ユニットテスト
 .github/workflows/       CI（Python 3.11・3.12）
 ```
 
+## 根拠（学習）
+
+| 機能 | 裏付けになる学習（発行元・名称・発行日） | 照会先（Credly） |
+|---|---|---|
+| プロンプトの版管理と内容のハッシュ | Coursera（認定：IBM）「Generative AI: Prompt Engineering」2026年11月9日 | https://www.credly.com/badges/ecab0c9c-e786-4c7b-8209-e796cff09b9a |
+| 版どうしの評価スコアの比較 | Coursera「Google Prompting Essentials」2026年10月13日 | https://www.credly.com/badges/c5305332-c47b-480d-85e0-678a72908a79 |
+
 ## ライセンス
 MIT
