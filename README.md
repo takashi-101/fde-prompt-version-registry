@@ -1,8 +1,11 @@
 # FDE Prompt Version Registry（プロンプト版管理・回帰判定レジストリ）
 
+[![tests](https://github.com/takashi-101/fde-prompt-version-registry/actions/workflows/tests.yml/badge.svg)](https://github.com/takashi-101/fde-prompt-version-registry/actions/workflows/tests.yml)
+
 プロンプトの本文を、名前と版（バージョン）ごとに評価スコアとともに JSON ファイルへ保存し、2つの版のスコアを比べて回帰（更新後に品質が下がること）が起きていないかを判定する小さなレジストリです。評価スコアは、利用者が別の手段で測って渡します。このツールは評価を実行しません。
 
 ## 30秒で読む要点
+- **なぜ作ったか**：プロンプトを直すと、結果が良くなることも悪くなることもあります。どの版の文面がどの評価スコアだったかを残し、直した版が前の版より下がっていないかを確かめてから使うための記録です。
 - **版ごとに本文・スコア・ハッシュを保存します**：`register` は、本文の SHA-256（内容から決まる固定長の値）の先頭12文字を `content_hash` として付け、JSON ファイルに書き出します。同じ名前と版で登録し直すと上書きします。
 - **回帰の判定はスコアの比較だけです**：`check_regression(name, base_ver, cand_ver)` は、候補の版のスコアが基準の版以上なら `True`（回帰なし）、下回れば `False` を返します。登録されていない版を指定すると `KeyError` です。
 - **標準ライブラリだけで動きます**：外部との通信や有料APIは使いません。テストは24件（正常・境界・異常）です。
